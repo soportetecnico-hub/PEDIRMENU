@@ -1,0 +1,149 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Perfil de empleado de Planta Nova para pedidos del comedor corporativo",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Identificador único de Firebase Auth"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Correo corporativo del empleado"
+        },
+        "name": {
+          "type": "string",
+          "description": "Nombre y apellidos completos del empleado"
+        },
+        "dni": {
+          "type": "string",
+          "description": "Documento Nacional de Identidad (8 dígitos)"
+        },
+        "department": {
+          "type": "string",
+          "description": "Área o departamento de trabajo en Planta Nova"
+        },
+        "company": {
+          "type": "string",
+          "description": "Sede corporativa de la empresa"
+        },
+        "verified": {
+          "type": "boolean",
+          "description": "Indica si el usuario está verificado"
+        }
+      },
+      "required": ["uid", "email", "name", "dni"]
+    },
+    "DailyMenu": {
+      "title": "DailyMenu",
+      "description": "Menú del día con las tres opciones gastronómicas ofrecidas",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identificador del menú por fecha (ej. menu-2026-09-22)"
+        },
+        "date": {
+          "type": "string",
+          "description": "Fecha del menú en formato YYYY-MM-DD"
+        },
+        "dayName": {
+          "type": "string",
+          "description": "Nombre del día de la semana (ej. MARTES)"
+        },
+        "displayDate": {
+          "type": "string",
+          "description": "Fecha formateada para presentación (ej. 22 / 09 / 2026)"
+        },
+        "isHoliday": {
+          "type": "boolean",
+          "description": "Indica si es feriado o no laborable"
+        },
+        "options": {
+          "type": "array",
+          "description": "Opciones de plato principal y acompañamientos disponibles"
+        }
+      },
+      "required": ["id", "date", "dayName", "displayDate", "options"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Pedido mensual o semanal registrado por el empleado",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identificador único del pedido o código"
+        },
+        "orderCode": {
+          "type": "string",
+          "description": "Código visible de ticket (ej. PED-659230)"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Identificador de usuario solicitante"
+        },
+        "userEmail": {
+          "type": "string",
+          "format": "email",
+          "description": "Correo del empleado"
+        },
+        "userName": {
+          "type": "string",
+          "description": "Nombre del empleado"
+        },
+        "userDni": {
+          "type": "string",
+          "description": "DNI del empleado"
+        },
+        "userDepartment": {
+          "type": "string",
+          "description": "Área del empleado"
+        },
+        "userCompany": {
+          "type": "string",
+          "description": "Empresa o sede del empleado"
+        },
+        "elections": {
+          "type": "array",
+          "description": "Lista de platos elegidos por fecha"
+        },
+        "observations": {
+          "type": "string",
+          "description": "Observaciones, alergias o notas de preparación"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "confirmed", "cancelled"],
+          "description": "Estado del pedido"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Marca de tiempo ISO de creación"
+        },
+        "timeFormatted": {
+          "type": "string",
+          "description": "Hora legible formateada del ticket"
+        }
+      },
+      "required": ["id", "orderCode", "userId", "userEmail", "elections", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Colección de perfiles de usuario"
+    },
+    "/menus/{menuId}": {
+      "schema": "DailyMenu",
+      "description": "Colección de menús diarios gastronómicos"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Colección de pedidos y tickets de comedor"
+    }
+  }
+}

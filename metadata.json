@@ -1,0 +1,6 @@
+{
+  "name": "Fogón Gastronómico - Pedidos de Menú",
+  "description": "Sistema de Gestión y Pedidos de Menú Diario para Planta Nova Maquinarias con persistencia en Firestore y autenticación Firebase.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
